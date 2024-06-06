@@ -1,0 +1,80 @@
+.product-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+.product-lists {
+    border-top: 2px solid rgb(191, 189, 185);
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+      flex-wrap: wrap;
+}
+
+.product-lists img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.add-btn {
+    color: green;
+    position: relative;
+    bottom: 10px;
+    right: 90px;
+    padding: 5px;
+    background-color: white;
+    border: none;
+    font-weight: 700;
+    border-radius: 6px;
+    width: 80px;
+}
+
+.product-lists p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.add-btn button {
+    border: none;
+}
+
+.product-lists p:nth-child(2),
+.product-lists p:nth-child(3) {
+    color: gray;
+}
+
+.hotel-name {
+    margin: 20px 50px;
+}
+
+@media (min-width: 768px) {
+    
+    .product-container {
+        padding: 0 50px;
+    }
+
+    .product-lists {
+        padding: 10px 30px;
+    }
+
+    .hotel-name {
+        margin: 20px 100px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-container {
+        padding: 0 200px;
+    }
+
+    .product-lists {
+        padding: 10px 30px;
+    }
+
+    .hotel-name {
+        margin: 20px 250px;
+    }
+}
