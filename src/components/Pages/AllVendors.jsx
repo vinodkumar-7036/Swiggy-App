@@ -30,25 +30,23 @@ const AllVendors = () => {
   useEffect(() => {
     getAllVendors();
   }, []);
-  
 
-  const handleScroll =(direction)=>{
+  const handleScroll = (direction) => {
     const gallery = document.getElementById("chainGallery");
     const scrollAmount = 500;
 
-    if(direction === "left"){
-        gallery.scrollTo({
-            left: gallery.scrollLeft -scrollAmount,
-            behavior: "smooth"
-        })
-    }else if( direction === "right"){
-        gallery.scrollTo({
-            left: gallery.scrollLeft + scrollAmount,
-            behavior: "smooth"
-        })
+    if (direction === "left") {
+      gallery.scrollTo({
+        left: gallery.scrollLeft - scrollAmount,
+        behavior: "smooth",
+      });
+    } else if (direction === "right") {
+      gallery.scrollTo({
+        left: gallery.scrollLeft + scrollAmount,
+        behavior: "smooth",
+      });
     }
-
-}
+  };
   const filterHandler = (region, category) => {
     setSelectedRegion(region);
     setActiveCategory(category);
@@ -64,33 +62,36 @@ const AllVendors = () => {
 
   return (
     <div>
-     
       {vendors.length === 0 ? (
         <p>No vendors available</p>
       ) : (
         <>
-        <div className="btnSection">
-        <button onClick={()=>handleScroll("left") } className='btnIcons'>
-      <FaArrowLeft/>
-         </button>
-        <button onClick={()=>handleScroll("right")} className='btnIcons'>
-        <FaArrowRight/>
-        </button>
-      </div>
-        <div className="vendor-card"  id="chainGallery" onScroll={(e)=>setScrollPosition(e.target.scrollf)}>
-          {vendors.map((vendor) => (
-            <div key={vendor._id} className="vendor-box">
-              {vendor.firm.map((foodDetails) => (
-                <div key={foodDetails._id}>
-                  <img
-                    src={`${API_BASE_URL}/uploads/${foodDetails.image}`}
-                    alt="Food item"
-                  />
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+          <div className="btnSection">
+            <button onClick={() => handleScroll("left")} className="btnIcons">
+              <FaArrowLeft />
+            </button>
+            <button onClick={() => handleScroll("right")} className="btnIcons">
+              <FaArrowRight />
+            </button>
+          </div>
+          <div
+            className="vendor-card"
+            id="chainGallery"
+            onScroll={(e) => setScrollPosition(e.target.scrollf)}
+          >
+            {vendors.map((vendor) => (
+              <div key={vendor._id} className="vendor-box">
+                {vendor.firm.map((foodDetails) => (
+                  <div key={foodDetails._id}>
+                    <img
+                      src={`${API_BASE_URL}/uploads/${foodDetails.image}`}
+                      alt="Food item"
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </>
       )}
 
@@ -119,51 +120,55 @@ const AllVendors = () => {
             onClick={() => filterHandler("Chinese", "chinese")}
             className={activeCategory === "chinese" ? "activeButton" : ""}
           >
-            Chinese
+            Chinesee
           </button>
           <button
             onClick={() => filterHandler("Bakery", "bakery")}
             className={activeCategory === "bakery" ? "activeButton" : ""}
           >
-            Bakery
+            Bakerye
           </button>
         </div>
         <div className="food-card">
-          {vendors.map((vendor) => (
-            vendor.firm.some((foodDetails) => 
-              selectedRegion === "All" || 
-              foodDetails.region.includes(selectedRegion.toLowerCase())
-            ) && (
-              <div key={vendor._id} className="food-box">
-                {vendor.firm.map((foodDetails) => {
-                  if (
-                    selectedRegion === "All" ||
-                    foodDetails.region.includes(selectedRegion.toLowerCase())
-                  ) {
-                    return (
-                      <div
-                        key={foodDetails._id}
-                        onClick={() => navigate(`/product/${foodDetails._id}`)}
-                        className="food-item"
-                      >
-                        <img
-                          src={`${API_BASE_URL}/uploads/${foodDetails.image}`}
-                          alt="Food item"
-                        />
-                        <div className="food-offer">{foodDetails.offer}</div>
-                        <div className="firm-data">
-                          <p>{foodDetails.firmName}</p>
-                          <p>{foodDetails.region.join(", ")}</p>
-                          <p>{foodDetails.area}</p>
+          {vendors.map(
+            (vendor) =>
+              vendor.firm.some(
+                (foodDetails) =>
+                  selectedRegion === "All" ||
+                  foodDetails.region.includes(selectedRegion.toLowerCase())
+              ) && (
+                <div key={vendor._id} className="food-box">
+                  {vendor.firm.map((foodDetails) => {
+                    if (
+                      selectedRegion === "All" ||
+                      foodDetails.region.includes(selectedRegion.toLowerCase())
+                    ) {
+                      return (
+                        <div
+                          key={foodDetails._id}
+                          onClick={() =>
+                            navigate(`/product/${foodDetails._id}`)
+                          }
+                          className="food-item"
+                        >
+                          <img
+                            src={`${API_BASE_URL}/uploads/${foodDetails.image}`}
+                            alt="Food item"
+                          />
+                          <div className="food-offer">{foodDetails.offer}</div>
+                          <div className="firm-data">
+                            <p>{foodDetails.firmName}</p>
+                            <p>{foodDetails.region.join(", ")}</p>
+                            <p>{foodDetails.area}</p>
+                          </div>
                         </div>
-                      </div>
-                    );
-                  }
-                  return null;
-                })}
-              </div>
-            )
-          ))}
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+              )
+          )}
         </div>
       </div>
     </div>
